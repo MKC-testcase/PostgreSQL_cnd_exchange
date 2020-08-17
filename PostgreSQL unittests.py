@@ -17,7 +17,7 @@ class PostgreSQL_Test(unittest.TestCase):
         self.conn.close()
 
     def test_class_interaction(self):
-        """Tests the """
+        """Tests the basic functions in the PostgreSQL_analysis.py"""
         self.new_class = db_interactions()
         self.new_class.query_version()
         db_version = self.new_class.get_fetchone()
