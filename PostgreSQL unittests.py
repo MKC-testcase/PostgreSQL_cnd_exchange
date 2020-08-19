@@ -31,12 +31,26 @@ class PostgreSQL_Test(unittest.TestCase):
         db_version = self.new_class.get_fetchone()
         self.assertEqual(db_version, ('PostgreSQL 12.1, compiled by Visual C++ build 1914, 64-bit',))
 
-    def test_database_id(self):
+    def test_execute_SQL(self):
         """ Tests sending string to Execute SQL function code other than collecting the version"""
         self.new_class = db_interactions()
         self.new_class.execute_query("SELECT type_of_currency FROM cnd_exchange_rate WHERE id = 3")
         db_version = self.new_class.get_fetchone()
         self.assertEqual(db_version, ('Canadian-Dollar Effective Exchange Rate Index (CERI)',))
+
+    def test_get_fetch(self):
+        """ Tests get_fetch function"""
+        self.new_class = db_interactions()
+        self.new_class.execute_query("SELECT type_of_currency FROM cnd_exchange_rate WHERE id = 3")
+        db_version = self.new_class.get_fetch(1)
+        self.assertEqual(db_version, [('Canadian-Dollar Effective Exchange Rate Index (CERI)',)])
+
+    def test_get_fetch_optional(self):
+        """ Tests get_fetch function"""
+        self.new_class = db_interactions()
+        self.new_class.execute_query("SELECT type_of_currency FROM cnd_exchange_rate WHERE id = 3")
+        db_version = self.new_class.get_fetch()
+        self.assertEqual(db_version, [('Canadian-Dollar Effective Exchange Rate Index (CERI)',)])
 
     def test_connection(self):
         """
