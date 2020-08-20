@@ -21,7 +21,6 @@ class PostgreSQL_Test(unittest.TestCase):
         self.new_class = db_interactions()
         self.new_class.query_version()
         db_version = self.new_class.get_fetchone()
-        self.new_class.print_db()
         self.assertEqual(db_version,('PostgreSQL 12.1, compiled by Visual C++ build 1914, 64-bit',))
 
     def test_database_id(self):
@@ -51,6 +50,14 @@ class PostgreSQL_Test(unittest.TestCase):
         self.new_class.execute_query("SELECT type_of_currency FROM cnd_exchange_rate WHERE id = 3")
         db_version = self.new_class.get_fetch()
         self.assertEqual(db_version, [('Canadian-Dollar Effective Exchange Rate Index (CERI)',)])
+
+    def test_get_fetch_multiple(self):
+        """ Tests get_fetch function for multiple entries"""
+        self.new_class = db_interactions()
+        self.new_class.execute_query("SELECT type_of_currency FROM cnd_exchange_rate WHERE id > 3 AND id < 6")
+        db_version = self.new_class.get_fetch()
+        self.new_class.print_db()
+        self.assertEqual(db_version, [('Canadian-Dollar Effective Exchange Rate Index (CERI)',),('Canadian-Dollar Effective Exchange Rate Index (CERI)',)])
 
     def test_connection(self):
         """
