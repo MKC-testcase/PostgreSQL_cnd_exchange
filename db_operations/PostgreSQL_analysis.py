@@ -32,8 +32,10 @@ class db_interactions:
             print(i)
 
 #New structure for fetch, have 1 fetchas that does all the other fetch when other input given, if no input fetch all
-    def get_fetch(self, **collect):
+    def get_fetch(self, *args, **kwargs): # *args checks for any number of inputs afterwards the self, and ** kwargs represents the option input
         """implementation of variable fetches(one, many or all) """
+        collect = kwargs.get('collect', None) #this just checks if the variable written in is collect
+        # (if nothing is written then assumed it is collect)
         try:
             if collect == None:
                 self.db_content = self.cur.fetchall()

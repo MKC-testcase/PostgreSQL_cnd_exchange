@@ -1,6 +1,6 @@
 import unittest
 import psycopg2
-from cnd_exchange_rate.db_operations.PostgreSQL_analysis import db_interactions
+from db_operations.PostgreSQL_analysis import db_interactions
 
 
 
@@ -17,20 +17,47 @@ class PostgreSQL_Test(unittest.TestCase):
         self.conn.close()
 
     def test_class_interaction(self):
-        """Tests the basic functions in the PostgreSQL_analysis.py"""
+        """Tests the basic class functions in PostgreSQL_analysis"""
         self.new_class = db_interactions()
         self.new_class.query_version()
         db_version = self.new_class.get_fetchone()
-        self.new_class.print_db()
         self.assertEqual(db_version,('PostgreSQL 12.1, compiled by Visual C++ build 1914, 64-bit',))
 
     def test_database_id(self):
-        self.conn = psycopg2.connect(host="localhost", database="mdata", user="postgres", password="deus3stm4china")
-        self.cur = self.conn.cursor()
-        self.cur.execute('SELECT id FROM cnd_exchange_rate WHERE id = 3')
-        id_check = self.cur.fetchone()
-        self.assertEqual(id_check, "3")
-        self.conn.close()
+        """ Tests sending string to Execute SQL function code"""
+        self.new_class = db_interactions()
+        self.new_class.execute_query("SELECT version()")
+        db_version = self.new_class.get_fetchone()
+        self.assertEqual(db_version, ('PostgreSQL 12.1, compiled by Visual C++ build 1914, 64-bit',))
+
+    def test_execute_SQL(self):
+        """ Tests sending string to Execute SQL function code other than collecting the version"""
+        self.new_class = db_interactions()
+        self.new_class.execute_query("SELECT type_of_currency FROM cnd_exchange_rate WHERE id = 3")
+        db_version = self.new_class.get_fetchone()
+        self.assertEqual(db_version, ('Canadian-Dollar Effective Exchange Rate Index (CERI)',))
+
+    def test_get_fetch(self):
+        """ Tests get_fetch function"""
+        self.new_class = db_interactions()
+        self.new_class.execute_query("SELECT type_of_currency FROM cnd_exchange_rate WHERE id = 3")
+        db_version = self.new_class.get_fetch(1)
+        self.assertEqual(db_version, [('Canadian-Dollar Effective Exchange Rate Index (CERI)',)])
+
+    def test_get_fetch_optional(self):
+        """ Tests get_fetch function"""
+        self.new_class = db_interactions()
+        self.new_class.execute_query("SELECT type_of_currency FROM cnd_exchange_rate WHERE id = 3")
+        db_version = self.new_class.get_fetch()
+        self.assertEqual(db_version, [('Canadian-Dollar Effective Exchange Rate Index (CERI)',)])
+
+    def test_get_fetch_multiple(self):
+        """ Tests get_fetch function for multiple entries"""
+        self.new_class = db_interactions()
+        self.new_class.execute_query("SELECT type_of_currency FROM cnd_exchange_rate WHERE id > 3 AND id < 6")
+        db_version = self.new_class.get_fetch()
+        self.new_class.print_db()
+        self.assertEqual(db_version, [('Canadian-Dollar Effective Exchange Rate Index (CERI)',),('Canadian-Dollar Effective Exchange Rate Index (CERI)',)])
 
     def test_connection(self):
         """

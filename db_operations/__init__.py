@@ -10,7 +10,7 @@ import os
 import git
 import subprocess
 
-print("Pulling the most recent version from the package")
+print("Pulling the most recent version from GitHub")
 try:
     gitdir = os.getcwd() # gets the current directory
 
