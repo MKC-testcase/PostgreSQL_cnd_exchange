@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+#By Marcus Chan
+#Last Updated 2020-08-20
+#Required Libraries: psycopg2
+#Purpose:To create a conviennient wrapper for psycopg2 and create a few other functions to interact with observing things
+#       from the database
 
 import psycopg2
 
@@ -30,6 +35,36 @@ class db_interactions:
         """prints everythings that has been collected - as easy check"""
         for i in self.db_content:
             print(i)
+
+    def list_tables(self):
+        """This function lists the table names of the database (used in PostgreSQL_insertion.py)"""
+        # THIS STILL NEEDS A TESTCASE(unittest)
+        command1 = """SELECT tablename
+                    FROM pg_catalog.pg_tables
+                    WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema';"""
+        try:
+            self.execute_query(command1)
+            db_content = self.get_fetch()
+            return db_content
+        except ValueError:
+            print("There was an error in selecting the table name of the database returning empty list")
+            temp_list = []
+            return temp_list
+
+    def list_columns(self, table_name):
+        """This function lists the column names of the table selected (used in PostgreSQL_insertion.py)"""
+        #THIS STILL NEEDS A TESTCASE(unittest)
+        command2 = """SELECT column_name
+                    FROM information_schema.columns
+                    WHERE table_schema = 'public' AND table_name = '{}'""".format(table_name)
+        try:
+            self.execute_query(command2)
+            db_content = self.get_fetch()
+            return db_content
+        except ValueError:
+            print("There was an error in selecting the table name of the database returning empty list")
+            temp_list = []
+            return temp_list
 
 #New structure for fetch, have 1 fetchas that does all the other fetch when other input given, if no input fetch all
     def get_fetch(self, *args, **kwargs): # *args checks for any number of inputs afterwards the self, and ** kwargs represents the option input

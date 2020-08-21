@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 By: Marcus Chan
+Updated : 2020-08-20
 Purpose: create a auto updating package when used
 Libraries: gitPython, ([os,subprocess] should already be installed)
 pip install gitPython <- install gitPython (assuming you are using pip to install)
