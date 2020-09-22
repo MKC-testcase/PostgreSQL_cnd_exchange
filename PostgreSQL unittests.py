@@ -75,7 +75,7 @@ class PostgreSQL_Test(unittest.TestCase):
         """
         self.new_class = db_interactions()
         self.cur.execute('SELECT version()')
-        db_version = self.cur.fetchone()
+        db_version = self.cur.fetchone() 
         self.assertEqual(db_version, "('PostgreSQL 12.1, compiled by Visual C++ build 1914, 64-bit',)")
         self.conn.close()
 
