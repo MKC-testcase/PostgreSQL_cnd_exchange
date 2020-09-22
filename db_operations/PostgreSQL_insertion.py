@@ -13,7 +13,7 @@ class db_insert:
     """This class is used for helping with inserting data into the database"""
     def __init__(self):
         self.db_extract = db_interactions()
-        previous_date = "" #this will keep track of the most recent addition to the database from this program
+        self.previous_id = "" #this will keep track of the most recent addition to the database from this program
 
     def insert_help(self):
         """Creates guide to help the user see and interact with directing insertions into the database"""
@@ -30,12 +30,32 @@ class db_insert:
             print(column)
             print("\n")
 
+    def data_clean(self, string):
+        """this function clears away any special characters from the string leaving the spaces"""
+
+
     def auto_insert(self,table, columns, values):
-        #this function should automatically help the user place their values into the PostgreSQL database
-        print("placeholder")
+        """this function should automatically help the user place their values into the PostgreSQL database"""
+        columnstring = ""   #holds column format
+        valuesstring = ""   #holds values format
+        x = 0
+        y =0
+        for column in columns:
+            columnstring = ", ".join(columnstring, column)
+            x = x+1
+        for val in values:
+            valuesstring = ", ".join(valuesstring, val)
+            y = y+1
+        if x == y:
+            self.db_extract.execute_query("SELECT MAX(cnd_exchange_rate.id) FROM cnd_exchange_rate")
+            self.previous_id  =  self.db_extract.get_fetch()
+            sql_string = "INSERT INTO {table}({columns}) VALUES ({values});".format(table,columnstring, valuesstring)
+            self.db_extract.execute_query(sql_string) # executes the insertion based on the string createed above
+        else:
+            print("The number of columns and value do not match")
 
     def delete_recent(self):
-        #idea to reverse the changes just made on the database incase of error (database time log?) last 5 mins?
+        """idea to reverse the changes just made on the database incase of error (database time log?) last 5 mins?"""
         print("Placeholder")
 
 def main():

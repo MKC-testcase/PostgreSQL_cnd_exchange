@@ -65,7 +65,7 @@ class PostgreSQL_Test(unittest.TestCase):
         content = self.new_class.list_tables()
         self.assertEqual(content, [('cnd_exchange_rate',)])
 
-    def test_list_tables(self): #this function completely works even through test only go through 1 expected column name
+    def test_list_columns(self): #this function completely works even through test only go through 1 expected column name
         """ Tests list table function and function calls from within the program"""
         self.new_class = db_interactions()
         content = self.new_class.list_columns("cnd_exchange_rate")
