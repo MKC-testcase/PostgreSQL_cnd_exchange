@@ -6,8 +6,6 @@ import csv
 
 class web_interaction():
     def __init__(self):
-        self.browser = webdriver.Chrome('D:/Marcus/Python/dad_stock/chromedriver')
-        self.browser.get('https://ca.finance.yahoo.com/')
         self.rData = []
         self.csv_data = []
 
@@ -17,6 +15,10 @@ class web_interaction():
             for row in spamreader:
                 self.csv_data.append(row)
 
+    def open_browser(self):
+        self.browser = webdriver.Chrome('D:/Marcus/Python/dad_stock/chromedriver')
+        self.browser.get('https://ca.finance.yahoo.com/')
+
     def navigate_to_page(self, tick_name):
         search_bar = self.browser.find_element_by_name('yfin-usr-qry')
         search_bar.send_keys('{}'.format(tick_name))
@@ -24,10 +26,12 @@ class web_interaction():
         search_button.click()
 
     def extract_left(self):
+        """extracts the information from the left hand table on the Yahoo finance page"""
         for row in range(1, 9):
             try:
                 xpath = '//table[@class="W(100%)"]/tbody/tr[{}]/td[2]'.format(row)
                 elem = self.browser.find_element_by_xpath(xpath)
+                self.rData.append(elem.text)
                 print(elem.text)
             except:
                 print(
@@ -36,10 +40,12 @@ class web_interaction():
                 break
 
     def extract_right(self):
+        """extracts the information from the right hand table on the Yahoo finance page"""
         for row in range(1, 9):
             try:
                 xpath = '//table[@class="W(100%) M(0) Bdcl(c)"]/tbody/tr[{}]/td[2]'.format(row)
                 elem = self.browser.find_element_by_xpath(xpath)
+                self.rData.append(elem.text)
                 print(elem.text)
             except:
                 print(
@@ -47,11 +53,16 @@ class web_interaction():
                 print("However this might cause values to be placed incorrectly, please make sure to double check")
                 break
 
+    def content_reset(self):
+        """The purpose of this function is to reset the information for extraction"""
+        self.rData = []
+
     def exit_browser(self):
         self.browser.quit()
 
 if __name__ =='__main__':
     temp = web_interaction()
+    temp.open_browser()
     temp.navigate_to_page('BCE')
     sleep(4)
     temp.extract_left()
