@@ -10,10 +10,15 @@ class web_interaction():
         self.csv_data = []
 
     def csv_extract(self, csv_name):
+        i =0
         with open('{}'.format(csv_name), newline='') as csvfile:
             spamreader = csv.reader(csvfile, delimiter=',')
             for row in spamreader:
-                self.csv_data.append(row)
+                for r_elem in row:
+                    if i == 1:
+                        self.csv_data.append(r_elem)
+                    i = i+1
+                i = 0
 
     def open_browser(self):
         self.browser = webdriver.Chrome('D:/Marcus/Python/dad_stock/chromedriver')
@@ -52,6 +57,9 @@ class web_interaction():
                     "It appears that the company doesn't have all of the information usually provided, we have still saved the data that we have gathered")
                 print("However this might cause values to be placed incorrectly, please make sure to double check")
                 break
+
+    def to_local(self):
+        return self.rData
 
     def content_reset(self):
         """The purpose of this function is to reset the information for extraction"""
