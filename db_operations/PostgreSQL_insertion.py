@@ -40,16 +40,17 @@ class db_insert:
         valuesstring = ""   #holds values format
         x = 0
         y =0
-        for column in columns:
-            columnstring = ", ".join(columnstring, column)
-            x = x+1
-        for val in values:
-            valuesstring = ", ".join(valuesstring, val)
-            y = y+1
+        columnstring = ", ".join(columns)
+        x = len(columns)
+        valuesstring = "', '".join(values)
+        valuesstring = "'" + valuesstring + "'"
+        y = len(values)
         if x == y:
+            print(table)
             self.db_extract.execute_query("SELECT MAX(cnd_exchange_rate.id) FROM cnd_exchange_rate")
             self.previous_id  =  self.db_extract.get_fetch()
-            sql_string = "INSERT INTO {table}({columns}) VALUES ({values});".format(table,columnstring, valuesstring)
+            sql_string = "INSERT INTO {table_name} ({columns}) VALUES ({values});".format(table_name = table,columns = columnstring, values = valuesstring)
+            print(sql_string)
             self.db_extract.execute_query(sql_string) # executes the insertion based on the string createed above
         else:
             print("The number of columns and value do not match")

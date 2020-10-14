@@ -39,8 +39,7 @@ class web_interaction():
                 self.rData.append(elem.text)
                 print(elem.text)
             except:
-                print(
-                    "It appears that the company doesn't have all of the information usually provided, we have still saved the data that we have gathered")
+                print("It appears that the company doesn't have all of the information usually provided, we have still saved the data that we have gathered")
                 print("However this might cause values to be placed incorrectly, please make sure to double check")
                 break
 
