@@ -8,15 +8,15 @@ pip install gitPython <- install gitPython (assuming you are using pip to instal
 """
 
 import os
-import git
-import subprocess
-
-print("Pulling the most recent version from GitHub")
-try:
-    gitdir = os.getcwd() # gets the current directory
-
-    #The next 2 lines pulls from the git directory
-    g = git.cmd.Git(gitdir) #this should indicate where the git directory is based on the git folder in the directory
-    g.pull()# command that actually pull the
-except:
-    print("Attempt at pulling recent value has failed, please check git repository")
+# import git
+# import subprocess
+#
+# print("Pulling the most recent version from GitHub")
+# try:
+#     gitdir = os.getcwd() # gets the current directory
+#
+#     #The next 2 lines pulls from the git directory
+#     g = git.cmd.Git(gitdir) #this should indicate where the git directory is based on the git folder in the directory
+#     g.pull()# command that actually pull the code from github
+# except:
+#     print("Attempt at pulling recent value has failed, please check git repository")
