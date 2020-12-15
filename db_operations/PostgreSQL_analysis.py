@@ -24,6 +24,7 @@ class db_interactions:
     def execute_query(self, command):
         try:
             self.cur.execute(command)
+            print('Finished Executing Query')
         except ValueError:
             print("An incorrect SQL command was given Please Try Again")
 

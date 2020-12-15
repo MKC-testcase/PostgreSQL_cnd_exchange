@@ -26,7 +26,7 @@ yf_reader.open_browser() #opens browser, yahoo finance
 #loading the results from csv data into the rest of the web_interaction functions
 for elem in yf_reader.csv_data:
     yf_reader.navigate_to_page(elem) #browser to indicate webpage
-    sleep(4) #allows time for webpage to load
+    sleep(6) #allows time for webpage to load
     yf_reader.extract_left() #gets the information from the leftside table
     yf_reader.extract_right() #gets information from the rightside table
     ticker_data.append(yf_reader.to_local()) #copies the information from internal variable to local list

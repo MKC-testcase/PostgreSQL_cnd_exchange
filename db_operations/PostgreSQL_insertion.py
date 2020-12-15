@@ -13,7 +13,6 @@ class db_insert:
     """This class is used for helping with inserting data into the database"""
     def __init__(self):
         self.db_extract = db_interactions()
-        self.previous_id = "" #this will keep track of the most recent addition to the database from this program
 
     def insert_help(self):
         """Creates guide to help the user see and interact with directing insertions into the database"""
@@ -47,11 +46,10 @@ class db_insert:
         y = len(values)
         if x == y:
             print(table)
-            self.db_extract.execute_query("SELECT MAX(cnd_exchange_rate.id) FROM cnd_exchange_rate")
-            self.previous_id  =  self.db_extract.get_fetch()
             sql_string = "INSERT INTO {table_name} ({columns}) VALUES ({values});".format(table_name = table,columns = columnstring, values = valuesstring)
             print(sql_string)
-            self.db_extract.execute_query(sql_string) # executes the insertion based on the string createed above
+            print("Executing Query")
+            self.db_extract.execute_query(sql_string) # executes the insertion based on the string created above
         else:
             print("The number of columns and value do not match")
 
