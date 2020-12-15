@@ -2,8 +2,6 @@ import unittest
 import psycopg2
 from db_operations.PostgreSQL_analysis import db_interactions
 
-
-
 class PostgreSQL_Test(unittest.TestCase):
 
     def test_connection(self):
