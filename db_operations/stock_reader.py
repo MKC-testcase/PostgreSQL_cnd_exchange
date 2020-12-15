@@ -21,7 +21,7 @@ class web_interaction():
                 i = 0
 
     def open_browser(self):
-        self.browser = webdriver.Chrome('D:/Marcus/Python/dad_stock/chromedriver')
+        self.browser = webdriver.Chrome('D:/Marcus/Python/Github_PG_cnd/PostgreSQL_cnd_exchange/db_operations/chromedriver')
         self.browser.get('https://ca.finance.yahoo.com/')
 
     def navigate_to_page(self, tick_name):

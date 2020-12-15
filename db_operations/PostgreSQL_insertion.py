@@ -42,8 +42,8 @@ class db_insert:
         y =0
         columnstring = ", ".join(columns)
         x = len(columns)
-        valuesstring = "', '".join(values)
-        valuesstring = "'" + valuesstring + "'"
+        valuesstring = """', '""".join(values)
+        valuesstring = """'""" + valuesstring + """'"""
         y = len(values)
         if x == y:
             print(table)

@@ -8,7 +8,7 @@ from db_operations.PostgreSQL_insertion import db_insert
 from db_operations.stock_reader import web_interaction
 from time import sleep
 
-column_names = ["previous_close", "open", "bin", "ask", "day_range", "52 Week Range", "volume", "avg_volume", " market_cap", "beta(5Y Monthly", "PE Ratio", "eps", "Earnings Data", "Foward Dividend & Yield", "Ex-Dividend Date", "1y Target Estimate"]
+column_names = ["previous_close", "open", "bid", "ask", "day_range", "weeks52", "volume", "avg_volume", " market_cap", "monthly5y", "pe_ratio", "eps", "earn_date", "forward_div_yield", "exdiv_date", "t_estimate"]
 yf_reader = web_interaction()   #creates the object to interact with the functions in stock_reader
 data_insert = db_insert()
 
