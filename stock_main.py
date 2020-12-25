@@ -14,7 +14,10 @@ data_insert = db_insert()
 query_exe = db_interactions()
 
 #opens the csv file and sets it to web_interaction interal variable
+#//////////////////////////////////////////////////////////////////////////////////
 yf_reader.csv_extract("D:\\Marcus\\Python\\Github_PG_cnd\\test_file.csv")
+#need to make this input work as a browse function might need to get tkinter library involved
+#//////////////////////////////////////////////////////////////////////////////////
 
 #this tests if the elements extracted are in the second row(TESTED)
 for elem in yf_reader.csv_data:

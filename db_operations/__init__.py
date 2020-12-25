@@ -1,22 +1,20 @@
 #!/usr/bin/env python3
 """
 By: Marcus Chan
-Updated : 2020-08-20
+Updated : 2020-12-24
 Purpose: create a auto updating package when used
 Libraries: gitPython, ([os,subprocess] should already be installed)
 pip install gitPython <- install gitPython (assuming you are using pip to install)
 """
 
 import os
-# import git
-# import subprocess
-#
-# print("Pulling the most recent version from GitHub")
-# try:
-#     gitdir = os.getcwd() # gets the current directory
-#
-#     #The next 2 lines pulls from the git directory
-#     g = git.cmd.Git(gitdir) #this should indicate where the git directory is based on the git folder in the directory
-#     g.pull()# command that actually pull the code from github
-# except:
-#     print("Attempt at pulling recent value has failed, please check git repository")
+import sys
+import git
+import subprocess
+
+#this should install all required libraries for running this program
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'selenium'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'psycopg2'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'unittest'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'time'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'csv'])
