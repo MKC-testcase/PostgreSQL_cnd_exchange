@@ -17,6 +17,10 @@ class db_interactions:
         except Exception as exc:
             print('Error: {} exception raised by connection request'.format(exc))
             raise
+        self.cur.excute("select exists(select * from information_schema.tables where table_name=%s)", ('stock_data',))
+        check = self.cur.fetchone()[0]
+        if check == False:
+            self.cur.execute("CREATE TABLE stock_data")
 
     def SQL_command_builder(self):
         """The purpose of this function is to offer to Create SQL command easily"""

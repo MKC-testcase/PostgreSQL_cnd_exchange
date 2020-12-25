@@ -15,6 +15,3 @@ import subprocess
 #this should install all required libraries for running this program
 subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'selenium'])
 subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'psycopg2'])
-subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'unittest'])
-subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'time'])
-subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'csv'])

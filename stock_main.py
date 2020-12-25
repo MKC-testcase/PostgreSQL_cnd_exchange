@@ -18,9 +18,10 @@ query_exe = db_interactions()
 yf_reader.csv_extract("D:\\Marcus\\Python\\Github_PG_cnd\\test_file.csv")
 #need to make this input work as a browse function might need to get tkinter library involved
 #//////////////////////////////////////////////////////////////////////////////////
-
+ticker_name = []
 #this tests if the elements extracted are in the second row(TESTED)
 for elem in yf_reader.csv_data:
+    ticker_name.append(elem)
     print(elem)
 ticker_data = []
 
@@ -38,6 +39,8 @@ for elem in yf_reader.csv_data:
 #exits the browser to continue the program
 yf_reader.exit_browser()#exits the browser
 
+count = 0
 #turns the data collected into a string to execute
 for in_elem in ticker_data:
-    data_insert.auto_insert("stock_data", column_names, in_elem)
+    data_insert.auto_insert("stock_data", column_names, in_elem, ticker_name[count])
+    count = count + 1

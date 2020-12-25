@@ -33,7 +33,7 @@ class db_insert:
         """this function clears away any special characters from the string leaving the spaces"""
 
 
-    def auto_insert(self,table, columns, values):
+    def auto_insert(self,table, columns, values, ticker_name):
         """this function should automatically help the user place their values into the PostgreSQL database"""
         columnstring = ""   #holds column format
         valuesstring = ""   #holds values format
@@ -46,7 +46,7 @@ class db_insert:
         y = len(values)
         if x == y:
             print(table)
-            sql_string = "INSERT INTO {table_name} ({columns}) VALUES ({values});".format(table_name = table,columns = columnstring, values = valuesstring)
+            sql_string = "INSERT INTO {table_name} ({columns},ticker_name) VALUES ({values}, '"+ ticker_name +"');".format(table_name = table,columns = columnstring, values = valuesstring)
             print(sql_string)
             print("Executing Query")
             self.db_extract.execute_query(sql_string) # executes the insertion based on the string created above
