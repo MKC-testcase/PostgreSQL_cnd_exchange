@@ -19,8 +19,28 @@ class db_interactions:
             raise
         self.cur.execute("select exists(select * from information_schema.tables where table_name=%s)", ('stock_data',))
         check = self.cur.fetchone()[0]
+        create_table_stmt = "CREATE TABLE stock_data (" \
+                            "entry_id SERIAL PRIMARY KEY" \
+                            "previous_close DOUBLE(2)" \
+                            "open DOUBLE(2)" \
+                            "bid VARCHAR(25)" \
+                            "ask VARCHAR(25)" \
+                            "day_range VARCHAR(25)" \
+                            "volume VARCHAR(12)" \
+                            "avg_volume VARCHAR (12)" \
+                            "market_cap VARCHAR(10)" \
+                            "monthly5y DOUBLE(2)" \
+                            "pe_ratio VARCHAR(10)" \
+                            "eps DOUBLE" \
+                            "t_estimate VARCHAR(8)" \
+                            "entry_time DATETIME NOT NULL DEFAULT(GETDATE())" \
+                            "weeks52 VARCHAR(25)" \
+                            "forward_div_yield VARCHAR(15)" \
+                            "exdiv_date VARCHAR(24)" \
+                            "ticker_name VARCHAR"
+        #need to fill the above part in for automated table creation
         if check == False:
-            self.cur.execute("CREATE TABLE stock_data")
+            self.cur.execute(create_table_stmt)
 
     def SQL_command_builder(self):
         """The purpose of this function is to offer to Create SQL command easily"""
